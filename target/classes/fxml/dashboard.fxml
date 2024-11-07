@@ -360,7 +360,7 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="orders_amount_txt" layoutX="126.0" layoutY="296.0" onAction="#ordersAmount" prefHeight="30.0" prefWidth="174.0" styleClass="textfield" stylesheets="@../styles/dashboard.css" />
-                                    <Button fx:id="orders_receipt_btn" layoutX="39.0" layoutY="395.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="87.0" styleClass="receipt-btn" stylesheets="@../styles/dashboard.css" text="Receipt" />
+                                    <Button fx:id="orders_receipt_btn" layoutX="39.0" layoutY="395.0" mnemonicParsing="false" onAction="#ordersReceipt" prefHeight="41.0" prefWidth="87.0" styleClass="receipt-btn" stylesheets="@../styles/dashboard.css" text="Receipt" />
                                     <Button fx:id="orders_pay_btn" layoutX="183.0" layoutY="395.0" mnemonicParsing="false" onAction="#ordersPay" prefHeight="41.0" prefWidth="87.0" styleClass="pay-btn" stylesheets="@../styles/dashboard.css" text="Pay" />
                                     <Button fx:id="orders_reset_btn" layoutX="39.0" layoutY="456.0" mnemonicParsing="false" onAction="#ordersReset" prefHeight="41.0" prefWidth="87.0" styleClass="clear-btn" stylesheets="@../styles/dashboard.css" text="Reset" />
                                  </children>

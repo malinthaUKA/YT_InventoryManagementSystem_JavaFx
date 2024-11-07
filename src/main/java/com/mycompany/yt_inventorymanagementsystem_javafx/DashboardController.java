@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -47,6 +48,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.xml.transform.Result;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -753,9 +762,9 @@ public class DashboardController implements Initializable {
                     alert.setContentText("Successfully Payed!");
                     alert.showAndWait();
 
-                    ordersShowListData();
+//                    ordersShowListData();
 
-                    totalP = 0;
+//                    totalP = 0;
                     balance = 0;
                     amount = 0;
 
@@ -783,9 +792,35 @@ public class DashboardController implements Initializable {
 
     }
 
-    public void ordersReceipt(){
+    public void ordersReceipt() throws JRException{
         
-        
+        try {
+
+//            customerId();
+            
+            HashMap hash = new HashMap();
+            hash.put("inventoryP", customer_Id);
+            
+            if(totalP == 0){
+                
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid :3"); // kalin order eka pay karala iwara nam den totalP = 0 ema nisa receipt ekak print kranna denne aye order ekak daddi
+                alert.showAndWait();
+                
+            }else{
+                
+                JasperDesign jDesign = JRXmlLoader.load("H:\\Java new\\yt java projects\\YT_InventoryManagementSystem_JavaFx\\src\\main\\resources\\reports\\posReport.jrxml");
+                JasperReport jReport = JasperCompileManager.compileReport(jDesign);
+                JasperPrint jPrint = JasperFillManager.fillReport(jReport, hash, conn);
+                
+                JasperViewer.viewReport(jPrint, false);
+                
+                
+            }
+            
+        } catch (Exception e) {e.printStackTrace();}
         
     }
     
