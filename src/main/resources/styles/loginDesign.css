@@ -1,0 +1,51 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.left-form{
+    -fx-background-color:linear-gradient(to bottom right, #23825e, #6d6e30);
+}
+
+.right-form{
+    -fx-background-color:#fff;
+    -fx-border-color:#000;
+    -fx-border-width:.4px .4px .4px .0px;
+}
+
+.close{
+    -fx-background-color:transparent;
+    -fx-cursor:hand;
+}
+
+.close:hover{
+    -fx-background-color:#d73c3c;
+}
+
+.textfield{
+    -fx-background-color:linear-gradient(to bottom, #efefef, #eee);
+    -fx-background-radius:4px;
+    -fx-border-width:.4px;
+    -fx-border-radius:4px;
+    -fx-border-color:#000;
+    -fx-font-size:13px;
+    -fx-font-family:"Tahoma";
+}
+
+.textfield:focused{
+    -fx-background-color:#fff;
+    -fx-border-width:.8px;
+    -fx-border-color:linear-gradient(to bottom right, #23825e, #6d6e30);
+}
+
+.login-btn{
+    -fx-background-color:linear-gradient(to bottom, #1c936d, #245b55);
+    -fx-background-radius:4px;
+    -fx-text-fill:#fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+    -fx-cursor:hand;
+}
+
+.login-btn:hover{
+    -fx-background-color:linear-gradient(to bottom, #1da978, #297b72);
+}

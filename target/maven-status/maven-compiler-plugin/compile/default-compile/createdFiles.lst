@@ -1,4 +1,9 @@
+com\mycompany\yt_inventorymanagementsystem_javafx\ProductsModel.class
+com\mycompany\yt_inventorymanagementsystem_javafx\databaseHandler.class
+com\mycompany\yt_inventorymanagementsystem_javafx\CustomerData.class
 com\mycompany\yt_inventorymanagementsystem_javafx\PrimaryController.class
+com\mycompany\yt_inventorymanagementsystem_javafx\DashboardController.class
+com\mycompany\yt_inventorymanagementsystem_javafx\GetData.class
 module-info.class
+com\mycompany\yt_inventorymanagementsystem_javafx\LoginController.class
 com\mycompany\yt_inventorymanagementsystem_javafx\App.class
-com\mycompany\yt_inventorymanagementsystem_javafx\SecondaryController.class
