@@ -234,7 +234,87 @@ public class DashboardController implements Initializable {
     private PreparedStatement prepare;
     private Statement statement;
     private ResultSet resultSet;
+    
+    
+    public void homeDisplayTotalOrders(){
+//        
+//        Date date = new Date();
+//                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+//                    prepare.setString(8, String.valueOf(sqlDate));
 
+
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+//        String sql = "SELECT COUNT(id) AS count_of_id FROM customer_receipt";
+        String sql = "SELECT COUNT(id) FROM customer_receipt WHERE date = '"+sqlDate+"' ";
+        
+        conn = databaseHandler.connectDb();
+        
+        int countOrders = 0;
+        
+        try {
+            
+            prepare = conn.prepareStatement(sql);
+            resultSet = prepare.executeQuery();
+            
+            if(resultSet.next()){
+//                countOrders = resultSet.getInt("count_of_id");
+                countOrders = resultSet.getInt("COUNT(id)");
+            }
+            
+            home_numberOfOrders_lbl.setText(String.valueOf(countOrders));
+            
+        } catch (Exception e) {e.printStackTrace();}
+        
+    }
+    
+    public void homeTotalIncome(){
+        
+        String sql = "SELECT SUM(total) AS total_income FROM customer_receipt";
+        
+        conn = databaseHandler.connectDb();
+        
+        double totalIncome = 0;
+        
+        try {
+            
+            prepare = conn.prepareStatement(sql);
+            resultSet = prepare.executeQuery();
+            
+            if(resultSet.next()){
+                totalIncome = resultSet.getDouble("total_income");
+            }
+            
+            home_totalIncome_lbl.setText(String.valueOf("LKR " + totalIncome));
+            
+        } catch (Exception e) {e.printStackTrace();}
+        
+    }
+
+    public void homeAvailableProducts(){
+        
+        String sql = "SELECT COUNT(id) AS ava_products FROM product WHERE status = 'Available'";
+        
+        conn = databaseHandler.connectDb();
+        
+        int availableProducts = 0;
+        
+        try {
+            
+            prepare = conn.prepareStatement(sql);
+            resultSet = prepare.executeQuery();
+            
+            if(resultSet.next()){
+                availableProducts = resultSet.getInt("ava_products");
+            }
+            
+            home_availableProducts_lbl.setText(String.valueOf(availableProducts));
+            
+        } catch (Exception e) {e.printStackTrace();}
+        
+    }
+    
     public void addProductsAdd() {
 
         String sql = "INSERT INTO product (product_id, type, brand, product_name, price, status, image, date) "
@@ -1181,6 +1261,10 @@ public class DashboardController implements Initializable {
             home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #269e70, #969635);");
             addProducts_btn.setStyle("-fx-background-color:transparent;");
             orders_btn.setStyle("-fx-background-color:transparent;");
+            
+            homeDisplayTotalOrders();
+            homeTotalIncome();
+            homeAvailableProducts();
 
         } else if (event.getSource() == addProducts_btn) {
 
@@ -1281,6 +1365,10 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        homeDisplayTotalOrders();
+        homeTotalIncome();
+        homeAvailableProducts();
+        
         // TO SHOW THE DATA ON TABLEVIEW
         addProductsShowListData();
         addProductsListTypes();

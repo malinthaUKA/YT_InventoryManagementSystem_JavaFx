@@ -104,7 +104,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="home_form" layoutX="182.0" layoutY="128.0" prefHeight="554.4" prefWidth="872.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="home_form" layoutX="182.0" layoutY="128.0" prefHeight="554.4" prefWidth="872.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="16.0" layoutY="14.0" prefHeight="146.0" prefWidth="840.0" stylesheets="@../styles/dashboard.css">
                                  <styleClass>
@@ -115,7 +115,7 @@
                                     <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="122.0" prefWidth="258.0" styleClass="card" stylesheets="@../styles/dashboard.css">
                                        <children>
                                           <FontAwesomeIconView fill="WHITE" glyphName="USERS" layoutX="14.0" layoutY="78.0" size="4em" />
-                                          <Label layoutX="74.0" layoutY="85.0" text="Today's Number of Order" textFill="WHITE">
+                                          <Label layoutX="67.0" layoutY="85.0" text="Today's Number of Orders" textFill="WHITE">
                                              <font>
                                                 <Font name="Tahoma" size="15.0" />
                                              </font>
@@ -284,7 +284,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="orders_form" layoutX="285.0" layoutY="177.0" prefHeight="554.4" prefWidth="872.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="orders_form" layoutX="285.0" layoutY="177.0" prefHeight="554.4" prefWidth="872.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="526.0" prefWidth="517.0" stylesheets="@../styles/dashboard.css">
                                  <styleClass>
