@@ -29,6 +29,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -310,6 +311,73 @@ public class DashboardController implements Initializable {
             }
             
             home_availableProducts_lbl.setText(String.valueOf(availableProducts));
+            
+        } catch (Exception e) {e.printStackTrace();}
+        
+    }
+    
+    public void homeIncomeChart(){
+        
+        home_incomeChart.getData().clear();
+        
+//        String sql = "SELECT date, SUM(total) FROM customer_receipt GROUP BY date GROUP BY TIMESTAMP(date) ASC LIMIT 6";
+        
+        String sql = "SELECT date, SUM(total) FROM customer_receipt GROUP BY date ORDER BY TIMESTAMP(date) ASC LIMIT 6;";
+
+        conn = databaseHandler.connectDb();
+        
+        try {
+            
+            XYChart.Series chart = new XYChart.Series();
+            
+            prepare = conn.prepareStatement(sql);
+            resultSet = prepare.executeQuery();
+            
+            while(resultSet.next()){
+                chart.getData().add(new XYChart.Data(resultSet.getString(1), resultSet.getInt(2)));
+            }
+            
+            home_incomeChart.getData().add(chart);
+            
+        } catch (Exception e) {e.printStackTrace();}
+        
+    }
+    
+    public void homeOrdersChart(){
+        
+        home_orderChart.getData().clear();
+        
+        String sql = "SELECT date, COUNT(id) FROM customer_receipt GROUP BY date ORDER BY TIMESTAMP(date) ASC LIMIT 5";
+        
+        /*
+        SELECT date, SUM(total): We ask for two things: the date and the sum of income for each date. The SUM(total) adds up all income values for each date, so we get the total income on that day.
+        FROM customer_receipt: This tells the database to look in the customer_receipt table.
+        GROUP BY date: It groups the data by date, so it only shows one total amount per date.
+        ORDER BY TIMESTAMP(date) ASC: Orders the data by date from oldest to newest.
+        LIMIT 6: Only shows the last 6 days (or dates) of data.
+        */
+        
+        conn = databaseHandler.connectDb();
+        
+        try {
+            
+            XYChart.Series chart = new XYChart.Series<>(); // This creates an empty series, which is like a container that will hold all the data points for the chart.
+            
+            prepare = conn.prepareStatement(sql);
+            resultSet = prepare.executeQuery();
+            
+            while(resultSet.next()){
+                chart.getData().add(new XYChart.Data(resultSet.getString(1), resultSet.getInt(2)));
+                
+                /*
+                resultSet.next(): Moves to the next row of data.
+                resultSet.getString(1): Gets the date from the first column.
+                resultSet.getInt(2): Gets the total income for that date from the second column.
+                */
+                
+            }
+            
+            home_orderChart.getData().add(chart);
             
         } catch (Exception e) {e.printStackTrace();}
         
@@ -1041,7 +1109,7 @@ public class DashboardController implements Initializable {
 
         String sql = "SELECT * FROM product WHERE type = '"
                 + orders_productType_combo.getSelectionModel().getSelectedItem()
-                + "' and status = 'Available' ";
+                + "' and status = 'Available' GROUP BY brand";
 
         conn = databaseHandler.connectDb();
 
@@ -1265,6 +1333,8 @@ public class DashboardController implements Initializable {
             homeDisplayTotalOrders();
             homeTotalIncome();
             homeAvailableProducts();
+            homeIncomeChart();
+            homeOrdersChart();
 
         } else if (event.getSource() == addProducts_btn) {
 
@@ -1304,6 +1374,10 @@ public class DashboardController implements Initializable {
         }
     }
 
+    public void defaultNav(){
+        home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right, #269e70, #969635);"); // software eka run karala home page eka penne, ema nisa home_btn eka click unama watena pata watila tyena one muladima
+    }
+    
     private double x = 0;
     private double y = 0;
 
@@ -1353,6 +1427,10 @@ public class DashboardController implements Initializable {
         }
     }
 
+    public void displayUsername(){
+        username_lbl.setText(GetData.username);
+    }
+    
     public void minimize() {
         Stage stage = (Stage) main_form.getScene().getWindow();
         stage.setIconified(true);
@@ -1365,9 +1443,14 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        displayUsername();
+        defaultNav();
+        
         homeDisplayTotalOrders();
         homeTotalIncome();
         homeAvailableProducts();
+        homeIncomeChart();
+        homeOrdersChart();
         
         // TO SHOW THE DATA ON TABLEVIEW
         addProductsShowListData();

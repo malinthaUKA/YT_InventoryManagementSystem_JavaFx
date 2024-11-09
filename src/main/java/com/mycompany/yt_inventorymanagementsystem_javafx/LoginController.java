@@ -85,6 +85,8 @@ public class LoginController implements Initializable {
                 
                 if(result.next()){
                     
+                    GetData.username = username_txt.getText(); // set user name , this is use in DashboardController class
+                    
                     // IF CORRECT USERNAME AND PASSWORD, THEN PROCEED TO DASHBOARD FORM
                     alert =  new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information Message");
