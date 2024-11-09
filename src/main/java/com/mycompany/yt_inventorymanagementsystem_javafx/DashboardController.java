@@ -1109,7 +1109,7 @@ public class DashboardController implements Initializable {
 
         String sql = "SELECT * FROM product WHERE type = '"
                 + orders_productType_combo.getSelectionModel().getSelectedItem()
-                + "' and status = 'Available' GROUP BY brand";
+                + "' and status = 'Available'"; // GROUP BY brand
 
         conn = databaseHandler.connectDb();
 
